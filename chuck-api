@@ -1,0 +1,1 @@
+*/1 * * * * root /usr/local/bin/python /app/chuck-api-call.py >> /var/log/chuck.log 2>&1
