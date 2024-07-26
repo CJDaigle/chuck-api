@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chuck-api
+  labels:
+    app: chuck-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chuck-api
+  template:
+    metadata:
+      labels:
+        app: chuck-api
+    spec:
+      containers:
+      - name: chuck-api
+        image: claytondaigle/testing-api:cn-0.0.2
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 300m
+            memory: 400Mi
+          requests:
+            cpu: 200m
+            memory: 300Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chuck-api
+spec:
+  selector:
+    app: chuck-api
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+
+
